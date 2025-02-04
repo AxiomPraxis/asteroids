@@ -15,6 +15,7 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
     dt = 0
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     running = True
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -25,7 +26,8 @@ def main():
                 running = False
         screen.fill("black")
         dt = clock.tick(60) / 1000
-        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        print(dt)
+        player.update(dt)
         player.draw(screen)
         pygame.display.flip()
     pygame.quit()
