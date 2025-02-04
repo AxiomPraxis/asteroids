@@ -1,9 +1,16 @@
+'''
+Asteroids
+'''
 import pygame
 
-from constants import *
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from player import Player
 
 
 def main():
+    '''
+    Asteroids main function
+    '''
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
@@ -17,8 +24,10 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
         screen.fill("black")
-        pygame.display.flip()
         dt = clock.tick(60) / 1000
+        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+        player.draw(screen)
+        pygame.display.flip()
     pygame.quit()
 
 
