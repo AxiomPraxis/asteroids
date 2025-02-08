@@ -10,15 +10,15 @@ class CircleShape(pygame.sprite.Sprite):
         else:
             super().__init__()
 
-        self.position = pygame.Vector2(x, y)
-        self.velocity = pygame.Vector2(0, 0)
+        self.position: pygame.Vector2 = pygame.Vector2(x, y)
+        self.velocity: pygame.Vector2 = pygame.Vector2(0, 0)
         self.radius = radius
 
-    def draw(self, screen):
+    def draw(self, screen: pygame.surface.Surface):
         # sub-classes must override
         pass
 
-    def update(self, dt):
+    def update(self, dt: float):
         # sub-classes must override
         pass
 

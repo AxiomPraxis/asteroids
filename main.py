@@ -2,12 +2,17 @@
 Asteroids
 '''
 import sys
-import pygame
+from typing import Any
 
-from constants import SCREEN_HEIGHT, SCREEN_WIDTH
-from player import Player
+import pygame
+from pygame.sprite import Group
+from pygame.surface import Surface
+from pygame.time import Clock
+
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from constants import SCREEN_HEIGHT, SCREEN_WIDTH
+from player import Player
 
 
 
@@ -15,18 +20,18 @@ def main():
     '''
     Asteroids main function
     '''
-    pygame.init()
-    updateable = pygame.sprite.Group()
-    drawable = pygame.sprite.Group()
-    asteroids = pygame.sprite.Group()
+    _ = pygame.init()
+    updateable: Group[Any] = pygame.sprite.Group()
+    drawable: Group[Any] = pygame.sprite.Group()
+    asteroids: Group[Any] = pygame.sprite.Group()
     Player.containers = (updateable, drawable)
     Asteroid.containers = (asteroids, updateable, drawable)
     AsteroidField.containers = updateable
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pygame.time.Clock()
-    dt = 0
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
-    asteroidfield = AsteroidField()
+    screen: Surface = pygame.display.set_mode(size=(SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock: Clock = pygame.time.Clock()
+    dt: float = 0.0
+    player: Player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
+    asteroidfield: AsteroidField = AsteroidField()
     running = True
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -35,8 +40,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-        screen.fill("black")
-        dt = clock.tick(60) / 1000
+        _ = screen.fill(color="black")
+        dt= clock.tick(60) / 1000
         updateable.update(dt)
         for asteroid in asteroids:
             if asteroid.collision_check(player):
